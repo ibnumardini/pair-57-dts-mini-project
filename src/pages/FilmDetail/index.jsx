@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Container, Button } from "@mui/material";
 import { PlayArrow, Info } from "@mui/icons-material";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 import { Footer, Loading } from "../../components";
 
@@ -43,6 +44,9 @@ const FilmDetail = ({ tv }) => {
 
   return (
     <>
+      <Helmet>
+        <title>{tv ? "Tv" : "Film"} Detail | Movies App</title>
+      </Helmet>
       {!isLoaded && <Loading />}
       {isLoaded && (
         <>

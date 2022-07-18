@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container } from "@mui/material";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 import { ListFilm, Footer, Loading } from "../../components";
 
@@ -47,6 +48,9 @@ const Home = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Home | Movies App</title>
+      </Helmet>
       {!isLoaded && <Loading />}
       {isLoaded && (
         <>
