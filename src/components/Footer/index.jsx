@@ -38,14 +38,20 @@ const Footer = () => {
             </div>
           </div>
           <div className="footer__action">
-            <Button variant="outlined" color="success">
+            <Button
+              variant="outlined"
+              style={{
+                color: "#808080",
+                borderColor: "#808080",
+                borderRadius: 0,
+              }}
+            >
               Service Code
             </Button>
           </div>
           <div className="footer__copyright">
             <span>
-              Made with ❤️ By Pair 57 &copy; 2022 Movies, All Right
-              Reserved.
+              Made with ❤️ By Pair 57 &copy; 2022 Movies, All Right Reserved.
             </span>
           </div>
         </Container>
