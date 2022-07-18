@@ -4,6 +4,7 @@ import { Container, Button } from "@mui/material";
 import { PlayArrow, Info } from "@mui/icons-material";
 import axios from "axios";
 import { Helmet } from "react-helmet";
+import { format } from "date-fns";
 
 import { Footer, Loading } from "../../components";
 
@@ -31,8 +32,15 @@ const FilmDetail = ({ tv }) => {
     fetchData();
   }, [basePath, apiKey, filmId, tv]);
 
-  const { backdrop_path, poster_path, title, original_name, overview } =
-    detailFilm;
+  const {
+    backdrop_path,
+    poster_path,
+    title,
+    original_name,
+    overview,
+    release_date,
+    last_air_date,
+  } = detailFilm;
 
   const posterImage = poster_path
     ? `${imagePath}${poster_path}`
@@ -61,6 +69,14 @@ const FilmDetail = ({ tv }) => {
                 <div className="film_detail__hero__left">
                   <div className="film_detail__hero__title">
                     <h1>{title ?? original_name}</h1>
+                  </div>
+                  <div className="film_detail__hero__release_date">
+                    <p>
+                      {format(
+                        new Date(release_date ?? last_air_date),
+                        "EEEE, dd-MM-yyyy"
+                      )}
+                    </p>
                   </div>
                   <div className="film_detail__hero__desc">
                     <p>{overview}</p>
