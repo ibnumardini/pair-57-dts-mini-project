@@ -38,7 +38,6 @@ const ListFilm = ({ title, movies, tv }) => {
                 <SwiperSlide key={id}>
                   <Link
                     to={`/detail-${tv ? "tv" : "film"}/${id}`}
-                    state={{ movie }}
                   >
                     <img
                       src={`${imagePath}${tv ? poster_path : backdrop_path}`}
