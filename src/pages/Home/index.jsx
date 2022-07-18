@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Container } from "@mui/material";
 import axios from "axios";
 
-import { ListFilm } from "../../components";
+import { ListFilm, Footer, Loading } from "../../components";
 
 import "./Home.css";
 
@@ -10,6 +10,7 @@ const Home = () => {
   const basePath = "https://api.themoviedb.org/3/";
   const apiKey = "1cabb7d2645dbac2b690ffd7ec0a4a23";
 
+  const [isLoaded, setLoaded] = useState(false);
   const [popularMovies, setPopularMovies] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
   const [topRated, setTopRated] = useState([]);
@@ -37,6 +38,8 @@ const Home = () => {
         `${basePath}tv/top_rated?api_key=${apiKey}`
       );
       setTvTopRated(TvTopRatedResult.data.results);
+
+      setLoaded(true);
     };
 
     fetchData();
@@ -44,14 +47,20 @@ const Home = () => {
 
   return (
     <>
-      <Container maxWidth="lg">
-        <div className="home__list_film">
-          <ListFilm title="Popular" movies={popularMovies} />
-          <ListFilm title="Now Playing" movies={upcoming} />
-          <ListFilm title="Tv Top Rated" movies={tvTopRated} tv="true" />
-          <ListFilm title="Top Rated" movies={topRated} />
-        </div>
-      </Container>
+      {!isLoaded && <Loading />}
+      {isLoaded && (
+        <>
+          <Container maxWidth="lg">
+            <div className="home__list_film">
+              <ListFilm title="Popular" movies={popularMovies} />
+              <ListFilm title="Now Playing" movies={upcoming} />
+              <ListFilm title="Tv Top Rated" movies={tvTopRated} tv="true" />
+              <ListFilm title="Top Rated" movies={topRated} />
+            </div>
+          </Container>
+          <Footer />
+        </>
+      )}
     </>
   );
 };
