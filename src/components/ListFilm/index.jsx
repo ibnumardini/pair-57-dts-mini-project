@@ -25,8 +25,6 @@ const ListFilm = ({ title, movies, tv }) => {
             slidesPerView={4}
             navigation
             pagination={{ clickable: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log("slide change")}
             style={{
               "--swiper-pagination-color": "#fff",
               "--swiper-pagination-bullet-inactive-color": "#aeaeae",
@@ -37,7 +35,7 @@ const ListFilm = ({ title, movies, tv }) => {
               const { backdrop_path, poster_path, id, title } = movie;
 
               return (
-                <SwiperSlide>
+                <SwiperSlide key={id}>
                   <Link
                     to={`/detail-${tv ? "tv" : "film"}/${id}`}
                     state={{ movie }}
