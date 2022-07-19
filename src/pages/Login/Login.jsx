@@ -1,25 +1,29 @@
 import React, { useState } from "react";
-import "../Login/Login.css";
-import { Link } from "react-router-dom";
+import "./Login.css";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
 });
-const Register = () => {
+const Login = () => {
   const [error, setError] = useState(null);
   const [errorPass, setErrorPass] = useState(null);
-  const [input, setInput] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const [token, setToken] = useState(null);
   const [open, setOpen] = useState(false);
   const [succes, setSucces] = useState(null);
+  const [input, setInput] = useState({
+    username: "",
+    password: "",
+  });
   const basePath = process.env.REACT_APP_BASE_URL;
   const vertical = "top";
   const horizontal = "right";
+  if (token !== null) {
+    return <Navigate to={"/home"} />;
+  }
   const handleChange = (event) => {
     let value = event.target.value;
     let nameOfInput = event.target.name;
@@ -29,8 +33,8 @@ const Register = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { name, email, password } = input;
-    if (!isValidEmail(email)) {
+    const { username, password } = input;
+    if (!isValidEmail(username)) {
       setError("Email is invalid");
     } else {
       setError(null);
@@ -40,19 +44,23 @@ const Register = () => {
     } else {
       setErrorPass(null);
     }
-    if (isValidEmail(email) && password.length >= 6) {
+    if (isValidEmail(username) && password.length >= 6) {
       axios
-        .post(`${basePath}/register `, {
-          name: name,
-          email: email,
+        .post(`${basePath}/user-login`, {
+          email: username,
           password: password,
         })
         .then((e) => {
+          setToken(e.data.token);
+          let token = e.data.token;
+          let name = e.data.user?.name;
+          Cookies.set("token", token, { expires: 1 });
+          Cookies.set("name", name, { expires: 1 });
           setSucces(true);
           setOpen(true);
           setTimeout(() => {
             window.location.reload();
-          }, 700);
+          }, 500);
         })
         .catch((error) => {
           setSucces(false);
@@ -60,12 +68,14 @@ const Register = () => {
         });
     }
   };
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
     setOpen(false);
   };
+
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
   }
@@ -78,23 +88,12 @@ const Register = () => {
             <div className='input-container'>
               <input
                 type='text'
-                name='name'
-                required
-                className='input-box'
-                placeholder='NAME'
-                onChange={handleChange}
-                value={input.name}
-              />
-            </div>
-            <div className='input-container'>
-              <input
-                type='text'
-                name='email'
+                name='username'
                 required
                 className='input-box'
                 placeholder='EMAIL'
                 onChange={handleChange}
-                value={input.email}
+                value={input.username}
               />
             </div>
             {error && <span className='warning-text'>{error}</span>}
@@ -111,12 +110,12 @@ const Register = () => {
             </div>
             {errorPass && <span className='warning-text'>{errorPass}</span>}
             <div className='button-container'>
-              <input type='submit' className='button-login' value='REGISTER' />
+              <input type='submit' className='button-login' value='LOGIN' />
             </div>
             <span className='info-text'>
-              Have account ??{" "}
-              <Link to='/' style={{ textDecoration: "none" }}>
-                <span>Login here</span>
+              Don't have account ??{" "}
+              <Link to='/register' style={{ textDecoration: "none" }}>
+                <span>Register here</span>
               </Link>
             </span>
           </form>
@@ -134,13 +133,13 @@ const Register = () => {
             severity='success'
             sx={{ width: "100%" }}
           >
-            Succes Register
+            Succes Login
           </Alert>
         ) : (
-          <Alert severity='error'>Register Failed !!</Alert>
+          <Alert severity='error'>Email and Password Wrong</Alert>
         )}
       </Snackbar>
     </div>
   );
 };
-export default Register;
+export default Login;

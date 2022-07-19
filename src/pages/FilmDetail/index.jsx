@@ -6,7 +6,7 @@ import axios from "axios";
 import { Helmet } from "react-helmet";
 import { format } from "date-fns";
 
-import { Footer, Loading } from "../../components";
+import { Loading } from "../../components";
 
 import "./FilmDetail.css";
 
@@ -58,19 +58,19 @@ const FilmDetail = ({ tv }) => {
       {!isLoaded && <Loading />}
       {isLoaded && (
         <>
-          <Container maxWidth="lg">
-            <div className="film_detail">
+          <Container maxWidth='lg'>
+            <div className='film_detail'>
               <div
-                className="film_detail__hero"
+                className='film_detail__hero'
                 style={{
                   backgroundImage: `linear-gradient(30deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('${bannerImage}')`,
                 }}
               >
-                <div className="film_detail__hero__left">
-                  <div className="film_detail__hero__title">
+                <div className='film_detail__hero__left'>
+                  <div className='film_detail__hero__title'>
                     <h1>{title ?? original_name}</h1>
                   </div>
-                  <div className="film_detail__hero__release_date">
+                  <div className='film_detail__hero__release_date'>
                     <p>
                       {format(
                         new Date(release_date ?? last_air_date),
@@ -78,19 +78,19 @@ const FilmDetail = ({ tv }) => {
                       )}
                     </p>
                   </div>
-                  <div className="film_detail__hero__desc">
+                  <div className='film_detail__hero__desc'>
                     <p>{overview}</p>
                   </div>
-                  <div className="film_detail__hero__action">
+                  <div className='film_detail__hero__action'>
                     <Button
-                      variant="contained"
+                      variant='contained'
                       style={{ backgroundColor: "#fff", color: "#141414" }}
                       startIcon={<PlayArrow />}
                     >
                       Play
                     </Button>
                     <Button
-                      variant="contained"
+                      variant='contained'
                       style={{
                         backgroundColor: "rgba(255, 255, 255, 0.5)",
                         color: "#fff",
@@ -101,21 +101,21 @@ const FilmDetail = ({ tv }) => {
                     </Button>
                   </div>
                 </div>
-                <div className="film_detail__hero__right">
+                <div className='film_detail__hero__right'>
                   <img src={posterImage} alt={title} />
                 </div>
               </div>
-              <div className="film_detail__desc">
-                <div className="film_detail__desc__title">
+              <div className='film_detail__desc'>
+                <div className='film_detail__desc__title'>
                   <span>Description</span>
                 </div>
-                <div className="film_detail__desc__content">
+                <div className='film_detail__desc__content'>
                   <p>{overview}</p>
                 </div>
               </div>
             </div>
           </Container>
-          <Footer />
+          {/* <Footer /> */}
         </>
       )}
     </>
