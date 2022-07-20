@@ -45,6 +45,21 @@
   gap: 1rem;
 }
 
-.film_detail__desc__title {
+.film_detail__desc__title,
+.film_detail__trailer__title {
   font-size: 1.3rem;
+}
+
+.film_detail__trailer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.film_detail__trailer__content {
+  width: 100%;
+}
+
+.film_detail__trailer__content iframe {
+  border: none;
 }
