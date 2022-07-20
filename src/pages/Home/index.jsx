@@ -3,7 +3,7 @@ import { Container } from "@mui/material";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 
-import { ListFilm, Footer, Loading } from "../../components";
+import { ListFilm, Loading } from "../../components";
 
 import "./Home.css";
 
@@ -54,15 +54,15 @@ const Home = () => {
       {!isLoaded && <Loading />}
       {isLoaded && (
         <>
-          <Container maxWidth="lg">
-            <div className="home__list_film">
-              <ListFilm title="Popular" movies={popularMovies} />
-              <ListFilm title="Now Playing" movies={upcoming} />
-              <ListFilm title="Tv Top Rated" movies={tvTopRated} tv="true" />
-              <ListFilm title="Top Rated" movies={topRated} />
+          <Container maxWidth='lg'>
+            <div className='home__list_film'>
+              <ListFilm title='Popular' movies={popularMovies} />
+              <ListFilm title='Now Playing' movies={upcoming} />
+              <ListFilm title='Tv Top Rated' movies={tvTopRated} tv='true' />
+              <ListFilm title='Top Rated' movies={topRated} />
             </div>
           </Container>
-          <Footer />
+          {/* <Footer /> */}
         </>
       )}
     </>

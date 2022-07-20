@@ -1,0 +1,13 @@
+.logo-header{
+    height: 2rem;
+    width: auto;
+    margin-left: 2%;
+}
+.icon-movie:hover{
+    cursor: pointer;
+    color: #CFD2CF;
+}
+.css-4t3x6l-MuiPaper-root-MuiDrawer-paper {
+    width: 35%;
+    border-radius: 1%;
+}
