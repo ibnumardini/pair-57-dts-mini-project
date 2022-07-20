@@ -27,9 +27,7 @@ import Cookies from "js-cookie";
 const HeaderMovie = () => {
   const [value, setValue] = useState();
   const theme = useTheme();
-  console.log(theme);
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
-  console.log(isMatch);
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   let history = useNavigate();
@@ -37,7 +35,6 @@ const HeaderMovie = () => {
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
-  console.log("cookies", Cookies.get("name"));
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
@@ -74,7 +71,7 @@ const HeaderMovie = () => {
     <React.Fragment>
       <AppBar sx={{ background: "#063970" }}>
         <Toolbar>
-          <img src={logo} alt='Logo' className='logo-header' />
+          <img src={logo} alt="Logo" className="logo-header" />
           {isMatch ? (
             <>
               <Typography sx={{ fontSize: "2rem", paddingLeft: "10%" }}>
@@ -86,52 +83,52 @@ const HeaderMovie = () => {
             <>
               <Tabs
                 sx={{ marginLeft: "auto" }}
-                indicatorColor='secondary'
-                textColor='inherit'
+                indicatorColor="secondary"
+                textColor="inherit"
                 value={value}
                 onChange={(e, value) => setValue(value)}
               >
-                <Tab label='Home' to='/' component={Link} />
-                <Tab label='Series' />
-                <Tab label='Movies' />
-                <Tab label='New and Populer' />
-                <Tab label='My List' />
+                <Tab label="Home" to="/" component={Link} />
+                <Tab label="Series" />
+                <Tab label="Movies" />
+                <Tab label="New and Populer" />
+                <Tab label="My List" />
               </Tabs>
               <SearchOutlinedIcon
                 sx={{ marginLeft: "auto" }}
-                variant='contained'
-                className='icon-movie'
+                variant="contained"
+                className="icon-movie"
               />
               <Typography sx={{ fontSize: "1rem", paddingLeft: "1%" }}>
                 {Cookies.get("name")}
               </Typography>
               <CardGiftcardOutlinedIcon
                 sx={{ marginLeft: "10px" }}
-                variant='contained'
-                className='icon-movie'
+                variant="contained"
+                className="icon-movie"
               />
               <NotificationsNoneOutlinedIcon
                 sx={{ marginLeft: "10px" }}
-                variant='contained'
-                className='icon-movie'
+                variant="contained"
+                className="icon-movie"
               />
-              <img src={profil} alt='profil' className='logo-header' />
+              <img src={profil} alt="profil" className="logo-header" />
               <ArrowDropDownOutlinedIcon
                 sx={{ marginLeft: "10px" }}
-                variant='contained'
+                variant="contained"
                 ref={anchorRef}
-                id='composition-button'
+                id="composition-button"
                 aria-controls={open ? "composition-menu" : undefined}
                 aria-expanded={open ? "true" : undefined}
-                aria-haspopup='true'
+                aria-haspopup="true"
                 onClick={handleToggle}
-                className='icon-movie'
+                className="icon-movie"
               />
               <Popper
                 open={open}
                 anchorEl={anchorRef.current}
                 role={undefined}
-                placement='bottom-start'
+                placement="bottom-start"
                 transition
                 disablePortal
               >
@@ -149,8 +146,8 @@ const HeaderMovie = () => {
                       <ClickAwayListener onClickAway={handleClose}>
                         <MenuList
                           autoFocusItem={open}
-                          id='composition-menu'
-                          aria-labelledby='composition-button'
+                          id="composition-menu"
+                          aria-labelledby="composition-button"
                           onKeyDown={handleListKeyDown}
                         >
                           <MenuItem onClick={handleClose}>Profile</MenuItem>
