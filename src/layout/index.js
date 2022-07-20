@@ -3,7 +3,7 @@ const LayoutComponent = (props) => {
   return (
     <>
       <HeaderMovie />
-      <div style={{ marginTop: "10%" }}>{props.content}</div>
+      <div style={{ marginTop: "7%" }}>{props.content}</div>
       <Footer />
     </>
   );
